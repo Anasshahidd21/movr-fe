@@ -29,29 +29,21 @@ export class MapContainer extends Component {
 
   render() {
     return (
-      <Map
-        google={this.props.google}
-        zoom={16}
-        style={mapStyles}
-        initialCenter={{
-          lat: 45.4212,
-          lng: -75.6972,
-        }}
+      <CurrentLocation
+      centerAroundCurrentLocation
+      google={this.props.google}
+    >
+    <Marker onClick={this.onMarkerClick} name={'Current Location'} />
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+          onClose={this.onClose}
         >
-        <Marker
-        onClick={this.onMarkerClick}
-        name={'Kenyatta International Convention Centre'}
-      />
-      <InfoWindow
-        marker={this.state.activeMarker}
-        visible={this.state.showingInfoWindow}
-        onClose={this.onClose}
-      >
-        <div>
-          <h4>{this.state.selectedPlace.name}</h4>
-        </div>
-      </InfoWindow>
-      </Map>
+          <div>
+            <h4>{this.state.selectedPlace.name}</h4>
+          </div>
+        </InfoWindow>
+      </CurrentLocation>
     );
   }
 }
