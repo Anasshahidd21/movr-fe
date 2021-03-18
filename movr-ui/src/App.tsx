@@ -4,6 +4,7 @@ import Template from "./components/Registration/Template";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
+  
   const formData = [
     {
       label: "Email",
