@@ -15,6 +15,8 @@ interface inputProps {
 
 const Template = ({ formData, title, message }: inputProps) => {
   return (
+
+  <div className='registration-component'>
     <div className="registrationAlignment">
       <MDBCard>
         <MDBCardBody>
@@ -42,6 +44,7 @@ const Template = ({ formData, title, message }: inputProps) => {
           </form>
         </MDBCardBody>
       </MDBCard>
+    </div>
     </div>
   );
 };
