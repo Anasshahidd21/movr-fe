@@ -1,5 +1,10 @@
 import { MDBInput, MDBBtn, MDBCard, MDBCardBody } from "mdbreact";
 import "./TemplateRegistration.css";
+import React, { useState } from "react";
+import fire from "../../firebase" 
+require('firebase/auth');
+
+
 
 interface IformData {
   label: string;
@@ -14,6 +19,27 @@ interface inputProps {
 }
 
 const Template = ({ formData, title, message }: inputProps) => {
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const user = fire.auth().currentUser;
+
+  const onChange = React.useCallback(e => {
+    switch (e.target.name) {
+      case "password":
+        setErrorMessage("");
+        setPassword(e.target.value);
+        break;
+      case "email":
+        setErrorMessage("");
+        setEmail(e.target.value);
+        break;
+      default:
+    }
+  }, []);
+
+
   return (
 
   <div className='registration-component'>
@@ -31,6 +57,7 @@ const Template = ({ formData, title, message }: inputProps) => {
                     group
                     type={data.inputType}
                     placeholder={data.inputPlaceHolder}
+                    onChange={onChange}
                   />
                 );
               })}

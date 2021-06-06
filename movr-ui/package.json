@@ -12,6 +12,7 @@
     "@types/react-dom": "^16.9.8",
     "autoprefixer": "^9.8.0",
     "bootstrap": "^4.6.0",
+    "firebase": "^8.6.5",
     "google-maps-react": "^2.0.6",
     "mdbreact": "^5.0.1",
     "react": "^17.0.1",
