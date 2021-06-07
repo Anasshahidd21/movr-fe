@@ -25,19 +25,29 @@ const Template = ({ formData, title, message }: inputProps) => {
   const [email, setEmail] = useState("");
   const user = fire.auth().currentUser;
 
-  const onChange = React.useCallback(e => {
-    switch (e.target.name) {
+  const onChange = async(data: any) => {
+
+    switch (data.inputType) {
       case "password":
         setErrorMessage("");
-        setPassword(e.target.value);
+        setPassword(data.value);
         break;
       case "email":
         setErrorMessage("");
-        setEmail(e.target.value);
+        setEmail(data.value);
         break;
       default:
     }
-  }, []);
+  }
+
+  const onSubmit = async() => {
+    try {
+      setErrorMessage("");
+      fire.auth().createUserWithEmailAndPassword("sanihaseeb@hotmail.ca", "hello");
+    } catch (e) {
+      setErrorMessage(e.message);
+    }
+  };
 
 
   return (
@@ -53,18 +63,19 @@ const Template = ({ formData, title, message }: inputProps) => {
                 return (
                   <MDBInput
                     key={i}
+                    value = {data.inputType === 'email' ? email : password}
                     label={data.label}
                     group
                     type={data.inputType}
                     placeholder={data.inputPlaceHolder}
-                    onChange={onChange}
+                    onChange={() => onChange(data)}
                   />
                 );
               })}
             </div>
             <div className="text-center py-4 mt-3">
               <p className="message">{message}</p>
-              <MDBBtn color="cyan" type="submit">
+              <MDBBtn color="cyan" type="submit" onClick={onSubmit}>
                 {title}
               </MDBBtn>
             </div>
