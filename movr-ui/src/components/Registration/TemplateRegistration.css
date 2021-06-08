@@ -1,25 +1,24 @@
-body, html {
+body,
+html {
   height: 100%;
   margin: 0;
 }
 
 .registration-component {
-  background-image: url(../../images/login-bg.jpg);
+  /* background-image: url(../../images/login-bg.jpg); */
   height: 100vh;
-  width: 100vw; 
-  margin-top:-30px;
+  width: 100vw;
+  margin-top: -30px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-
 .registrationAlignment {
-  opacity:0.87;
+  opacity: 0.87;
   margin: auto;
   width: 300px;
   margin-top: 30px;
-  
 }
 
 .message {
@@ -27,8 +26,6 @@ body, html {
   color: gray;
 }
 
-
-
-
-
-
+.top {
+  margin-top: 25vh;
+}
