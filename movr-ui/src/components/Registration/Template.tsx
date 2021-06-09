@@ -22,15 +22,15 @@ const Template = ({ formData, title, message }: inputProps) => {
   const [email, setEmail] = useState("");
   const user = fire.auth().currentUser;
 
-  const onChange = async (data: any) => {
+  const onChange = async (data: any, val: any) => {
     switch (data.inputType) {
       case "password":
         setErrorMessage("");
-        setPassword(data.value);
+        setPassword(val.target.value);
         break;
       case "email":
         setErrorMessage("");
-        setEmail(data.value);
+        setEmail(val.target.value);
         break;
       default:
     }
@@ -42,13 +42,12 @@ const Template = ({ formData, title, message }: inputProps) => {
     try {
       event.preventDefault();
       setErrorMessage("");
-      console.log("we here");
       await fire
         .auth()
-        .createUserWithEmailAndPassword("sanihaseeb@hotmail.ca", "hello123");
+        .createUserWithEmailAndPassword(email, password);
     } catch (e) {
       setErrorMessage(e.message);
-      console.log(e);
+      console.log(errorMessage);
     }
   };
 
@@ -64,12 +63,12 @@ const Template = ({ formData, title, message }: inputProps) => {
                   return (
                     <MDBInput
                       key={i}
-                      value={data.inputType === "email" ? email : password}
                       label={data.label}
                       group
+                      value = {data.inputType==="email" ? email : password}
                       type={data.inputType}
                       placeholder={data.inputPlaceHolder}
-                      onChange={() => onChange(data)}
+                      onChange={(val) => onChange(data, val)}
                     />
                   );
                 })}
