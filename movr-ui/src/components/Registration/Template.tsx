@@ -67,16 +67,10 @@ const Template = ({ formData, title, message }: inputProps) => {
                       key={i}
                       label={data.label}
                       group
-
                       value = {data.inputType==="email" ? email : password}
                       type={data.inputType}
                       placeholder={data.inputPlaceHolder}
-                      onChange={(val) => onChange(data, val)}
-
-                      type={data.inputType}
-                      placeholder={data.inputPlaceHolder}
-                      onChange={onChange}
-
+                      onChange={val => onChange(data, val)}
                     />
                   );
                 })}
@@ -91,9 +85,6 @@ const Template = ({ formData, title, message }: inputProps) => {
                     event: React.SyntheticEvent<HTMLButtonElement, Event>
                   ) => onSubmit(event)}
                 >
-
-                <MDBBtn color="cyan" type="submit">
-
                   {title}
                 </MDBBtn>
               </div>
