@@ -22,6 +22,7 @@ const Template = ({ formData, title, message }: inputProps) => {
   const [email, setEmail] = useState("");
   const user = fire.auth().currentUser;
 
+
   const onChange = async (data: any, val: any) => {
     switch (data.inputType) {
       case "password":
@@ -51,10 +52,11 @@ const Template = ({ formData, title, message }: inputProps) => {
     }
   };
 
+
   return (
     <div className="registration-component">
       <div className="registrationAlignment">
-        <MDBCard>
+        <MDBCard className="top">
           <MDBCardBody>
             <form>
               <p className="h4 text-center py-4">{title}</p>
@@ -65,16 +67,23 @@ const Template = ({ formData, title, message }: inputProps) => {
                       key={i}
                       label={data.label}
                       group
+
                       value = {data.inputType==="email" ? email : password}
                       type={data.inputType}
                       placeholder={data.inputPlaceHolder}
                       onChange={(val) => onChange(data, val)}
+
+                      type={data.inputType}
+                      placeholder={data.inputPlaceHolder}
+                      onChange={onChange}
+
                     />
                   );
                 })}
               </div>
               <div className="text-center py-4 mt-3">
                 <p className="message">{message}</p>
+
                 <MDBBtn
                   color="cyan"
                   type="submit"
@@ -82,6 +91,9 @@ const Template = ({ formData, title, message }: inputProps) => {
                     event: React.SyntheticEvent<HTMLButtonElement, Event>
                   ) => onSubmit(event)}
                 >
+
+                <MDBBtn color="cyan" type="submit">
+
                   {title}
                 </MDBBtn>
               </div>
