@@ -95,7 +95,13 @@ const Template = ({ formData, title, message }: inputProps) => {
               </div>
               <div className="text-center py-4 mt-3">
                 <p className="message">{message}</p>
-                <MDBBtn color="cyan" type="submit" onClick={onSubmit}>
+                <MDBBtn
+                  color="cyan"
+                  type="submit"
+                  onClick={(
+                    event: React.SyntheticEvent<HTMLButtonElement, Event>
+                  ) => onSubmit(event)}
+                >
                   {title}
                 </MDBBtn>
               </div>
