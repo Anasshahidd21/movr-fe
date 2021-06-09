@@ -36,14 +36,19 @@ const Template = ({ formData, title, message }: inputProps) => {
     }
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async (
+    event: React.SyntheticEvent<HTMLButtonElement, Event>
+  ) => {
     try {
+      event.preventDefault();
       setErrorMessage("");
-      fire
+      console.log("we here");
+      await fire
         .auth()
-        .createUserWithEmailAndPassword("sanihaseeb@hotmail.ca", "hello");
+        .createUserWithEmailAndPassword("sanihaseeb@hotmail.ca", "hello123");
     } catch (e) {
       setErrorMessage(e.message);
+      console.log(e);
     }
   };
 
@@ -71,7 +76,13 @@ const Template = ({ formData, title, message }: inputProps) => {
               </div>
               <div className="text-center py-4 mt-3">
                 <p className="message">{message}</p>
-                <MDBBtn color="cyan" type="submit" onClick={onSubmit}>
+                <MDBBtn
+                  color="cyan"
+                  type="submit"
+                  onClick={(
+                    event: React.SyntheticEvent<HTMLButtonElement, Event>
+                  ) => onSubmit(event)}
+                >
                   {title}
                 </MDBBtn>
               </div>
