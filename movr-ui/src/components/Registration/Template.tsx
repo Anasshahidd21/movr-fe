@@ -22,19 +22,36 @@ const Template = ({ formData, title, message }: inputProps) => {
   const [email, setEmail] = useState("");
   const user = fire.auth().currentUser;
 
-  const onChange = React.useCallback((e) => {
-    switch (e.target.name) {
+
+  const onChange = async (data: any, val: any) => {
+    switch (data.inputType) {
       case "password":
         setErrorMessage("");
-        setPassword(e.target.value);
+        setPassword(val.target.value);
         break;
       case "email":
         setErrorMessage("");
-        setEmail(e.target.value);
+        setEmail(val.target.value);
         break;
       default:
     }
-  }, []);
+  };
+
+  const onSubmit = async (
+    event: React.SyntheticEvent<HTMLButtonElement, Event>
+  ) => {
+    try {
+      event.preventDefault();
+      setErrorMessage("");
+      await fire
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+    } catch (e) {
+      setErrorMessage(e.message);
+      console.log(errorMessage);
+    }
+  };
+
 
   return (
     <div className="registration-component">
@@ -50,16 +67,24 @@ const Template = ({ formData, title, message }: inputProps) => {
                       key={i}
                       label={data.label}
                       group
+                      value = {data.inputType==="email" ? email : password}
                       type={data.inputType}
                       placeholder={data.inputPlaceHolder}
-                      onChange={onChange}
+                      onChange={val => onChange(data, val)}
                     />
                   );
                 })}
               </div>
               <div className="text-center py-4 mt-3">
                 <p className="message">{message}</p>
-                <MDBBtn color="cyan" type="submit">
+
+                <MDBBtn
+                  color="cyan"
+                  type="submit"
+                  onClick={(
+                    event: React.SyntheticEvent<HTMLButtonElement, Event>
+                  ) => onSubmit(event)}
+                >
                   {title}
                 </MDBBtn>
               </div>
