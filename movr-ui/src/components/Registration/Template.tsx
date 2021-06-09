@@ -2,9 +2,10 @@ import { MDBInput, MDBBtn, MDBCard, MDBCardBody } from "mdbreact";
 import "./TemplateRegistration.css";
 import React, { useState } from "react";
 import fire from "../../firebase";
+import { signUpUser } from "./RegService";
 require("firebase/auth");
 
-interface IformData {
+export interface IformData {
   label: string;
   inputType: string;
   inputPlaceHolder: string;
@@ -14,6 +15,11 @@ interface inputProps {
   title: string;
   message: string;
   formData: IformData[];
+}
+
+export interface userData {
+  email: string;
+  password: string;
 }
 
 const Template = ({ formData, title, message }: inputProps) => {
@@ -43,9 +49,10 @@ const Template = ({ formData, title, message }: inputProps) => {
       event.preventDefault();
       setErrorMessage("");
       console.log("we here");
-      await fire
-        .auth()
-        .createUserWithEmailAndPassword("sanihaseeb@hotmail.ca", "hello123");
+      const signIn = await signUpUser({ email, password });
+      if (signIn) {
+        setErrorMessage("success");
+      }
     } catch (e) {
       setErrorMessage(e.message);
       console.log(e);
