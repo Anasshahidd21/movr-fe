@@ -30,15 +30,16 @@ const Template = ({ formData, title, message }: inputProps) => {
   const user = fire.auth().currentUser;
 
   let emitter: RegistrationEmitters | undefined;
-  const onChange = async (data: any) => {
+
+  const onChange = async (data: any, val: any) => {
     switch (data.inputType) {
       case "password":
         setErrorMessage("");
-        setPassword(data.value);
+        setPassword(val.target.value);
         break;
       case "email":
         setErrorMessage("");
-        setEmail(data.value);
+        setEmail(val.target.value);
         break;
       default:
     }
@@ -95,7 +96,7 @@ const Template = ({ formData, title, message }: inputProps) => {
                       group
                       type={data.inputType}
                       placeholder={data.inputPlaceHolder}
-                      onChange={() => onChange(data)}
+                      onChange={(val) => onChange(data, val)}
                     />
                   );
                 })}
