@@ -1,6 +1,7 @@
 import { MDBInput, MDBBtn, MDBCard, MDBCardBody } from "mdbreact";
 import "./TemplateRegistration.css";
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import fire from "../../firebase";
 import { signUpUser } from "./RegService";
 import { globalEvent } from "@billjs/event-emitter";
@@ -29,6 +30,7 @@ const Template = ({ formData, title, message }: inputProps) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const user = fire.auth().currentUser;
+  const history = useHistory();
 
   let emitter: RegModel | undefined;
 
@@ -46,6 +48,13 @@ const Template = ({ formData, title, message }: inputProps) => {
     }
   };
 
+  const flipTemplate = (title: String) => {
+    if(title === "Sign Up")
+      history.push("/login");
+    else
+    history.push("/signup");
+  }
+
   const onSubmit = async (
     event: React.SyntheticEvent<HTMLButtonElement, Event>
   ) => {
@@ -54,18 +63,17 @@ const Template = ({ formData, title, message }: inputProps) => {
       emitter = new RegModel();
       console.log(emitter, "emitting");
       setErrorMessage("");
-      console.log("we here");
       const data: userData = {
         email: email,
         password: password,
       };
-      console.log(email);
-      console.log(password);
       emitter.fireOnSignUp(data);
+
     } catch (e) {
       setErrorMessage(e.message);
       console.log(e);
     }
+
   };
 
   return (
@@ -91,7 +99,7 @@ const Template = ({ formData, title, message }: inputProps) => {
                 })}
               </div>
               <div className="text-center py-4 mt-3">
-                <p className="message">{message}</p>
+                <button className="message" onClick={() => flipTemplate(title)}> {message} </button>
                 <MDBBtn
                   color="cyan"
                   type="submit"
