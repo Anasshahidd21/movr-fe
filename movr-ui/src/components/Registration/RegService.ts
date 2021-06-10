@@ -1,9 +1,6 @@
-import { globalEvent } from "@billjs/event-emitter";
-import { EventEmitter } from "events";
-import { Component } from "react";
 import fire from "../../firebase";
 import RegistrationEmitters from "./RegistrationEmitters";
-import { userData } from "./Template";
+import { userData } from "./RegistrationInterfaces";
 
 export async function signUpUser({
   email,

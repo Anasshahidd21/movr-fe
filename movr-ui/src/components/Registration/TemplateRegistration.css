@@ -2,6 +2,7 @@ body,
 html {
   height: 100%;
   margin: 0;
+  margin-top: 15vh;
 }
 
 .registration-component {
@@ -24,6 +25,7 @@ html {
 .message {
   font-size: small;
   color: gray;
+  cursor: pointer;
 }
 
 .top {

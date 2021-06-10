@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import { userData } from "./Template";
+import { userData } from "./RegistrationInterfaces";
 
 export default class RegistrationEmitters {
   protected onDidSignUpEmitter: EventEmitter;
@@ -19,6 +19,6 @@ export default class RegistrationEmitters {
   };
 
   fireOnSignIn = (data: userData) => {
-    this.onDidSignInEmitter?.emit(this.SIGNUP, data);
+    this.onDidSignInEmitter?.emit(this.SIGNIN, data);
   };
 }

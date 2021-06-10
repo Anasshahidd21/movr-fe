@@ -1,35 +1,17 @@
 import { MDBInput, MDBBtn, MDBCard, MDBCardBody } from "mdbreact";
 import "./TemplateRegistration.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import fire from "../../firebase";
-import { signUpUser } from "./RegService";
-import { globalEvent } from "@billjs/event-emitter";
-import RegistrationEmitters from "./RegistrationEmitters";
+// import fire from "../../firebase";
 import RegModel from "./RegModel";
+import { inputProps, userData } from "./RegistrationInterfaces";
 require("firebase/auth");
-export interface IformData {
-  label: string;
-  inputType: string;
-  inputPlaceHolder: string;
-}
-
-interface inputProps {
-  title: string;
-  message: string;
-  formData: IformData[];
-}
-
-export interface userData {
-  email: string;
-  password: string;
-}
 
 const Template = ({ formData, title, message }: inputProps) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const user = fire.auth().currentUser;
+  // const user = fire.auth().currentUser;
   const history = useHistory();
 
   let emitter: RegModel | undefined;
@@ -49,11 +31,8 @@ const Template = ({ formData, title, message }: inputProps) => {
   };
 
   const flipTemplate = (title: String) => {
-    if(title === "Sign Up")
-      history.push("/login");
-    else
-    history.push("/signup");
-  }
+    history.push(title === "Sign Up" ? "/login" : "/signup");
+  };
 
   const onSubmit = async (
     event: React.SyntheticEvent<HTMLButtonElement, Event>
@@ -68,12 +47,10 @@ const Template = ({ formData, title, message }: inputProps) => {
         password: password,
       };
       emitter.fireOnSignUp(data);
-
     } catch (e) {
       setErrorMessage(e.message);
       console.log(e);
     }
-
   };
 
   return (
@@ -99,7 +76,10 @@ const Template = ({ formData, title, message }: inputProps) => {
                 })}
               </div>
               <div className="text-center py-4 mt-3">
-                <button className="message" onClick={() => flipTemplate(title)}> {message} </button>
+                <p className="message" onClick={() => flipTemplate(title)}>
+                  {" "}
+                  {message}{" "}
+                </p>
                 <MDBBtn
                   color="cyan"
                   type="submit"
