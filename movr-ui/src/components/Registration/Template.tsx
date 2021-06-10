@@ -56,8 +56,8 @@ const Template = ({ formData, title, message }: inputProps) => {
       setErrorMessage("");
       console.log("we here");
       const data: userData = {
-        email: "email@email.com",
-        password: "password123",
+        email: email,
+        password: password,
       };
       console.log(email);
       console.log(password);
