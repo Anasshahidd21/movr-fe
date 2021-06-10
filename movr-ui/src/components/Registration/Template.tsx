@@ -48,15 +48,18 @@ const Template = ({ formData, title, message }: inputProps) => {
     event: React.SyntheticEvent<HTMLButtonElement, Event>
   ) => {
     try {
+      event.preventDefault();
       emitter = new RegistrationEmitters();
       console.log(emitter, "emitting");
-      event.preventDefault();
       setErrorMessage("");
       console.log("we here");
-      const data: userData = { email, password };
+      const data: userData = {
+        email: "email@email.com",
+        password: "password123",
+      };
       console.log(email);
       console.log(password);
-      emitter.fireOnSignUp(data);
+      // emitter.fireOnSignUp(data);
       // console.log(emitter.SIGNUP);
       // const signIn = await signUpUser({ email, password });
       // if (signIn) {

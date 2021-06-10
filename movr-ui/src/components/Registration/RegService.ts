@@ -28,6 +28,7 @@ export async function signInUser({
 
 export class regService extends RegistrationEmitters {
   protected listenOnSignUp = () => {
+    console.log("inside here?");
     this.onDidSignUpEmitter.on(this.SIGNUP, async ({ email, password }) => {
       await signUpUser({ email, password });
     });
