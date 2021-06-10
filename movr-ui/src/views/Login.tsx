@@ -15,7 +15,7 @@ export default function Login() {
   ];
 
   const message = "Don't have an account? Register now";
-  const title = "Log in";
+  const title = "Login";
 
   return (
     <Template formData={formData} title={title} message={message}></Template>

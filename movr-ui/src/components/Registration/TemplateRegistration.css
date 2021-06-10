@@ -23,6 +23,7 @@ html {
 }
 
 .message {
+  margin-top: 10px;
   font-size: small;
   color: gray;
   cursor: pointer;
@@ -30,4 +31,9 @@ html {
 
 .top {
   margin-top: 25vh;
+}
+
+.error-message {
+  font-size: small;
+  color: rgb(207, 63, 63);
 }

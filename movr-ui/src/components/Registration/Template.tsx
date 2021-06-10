@@ -37,20 +37,20 @@ const Template = ({ formData, title, message }: inputProps) => {
   const onSubmit = async (
     event: React.SyntheticEvent<HTMLButtonElement, Event>
   ) => {
-    try {
-      event.preventDefault();
-      emitter = new RegModel();
-      console.log(emitter, "emitting");
-      setErrorMessage("");
-      const data: userData = {
-        email: email,
-        password: password,
-      };
+    event.preventDefault();
+    emitter = new RegModel();
+    setErrorMessage("");
+    const data: userData = { email, password };
+    if (title === "Login") {
+      emitter.fireOnSignIn(data);
+    } else {
       emitter.fireOnSignUp(data);
-    } catch (e) {
-      setErrorMessage(e.message);
-      console.log(e);
     }
+    setTimeout((e) => {
+      e = emitter;
+      const authMessage = e.getErrorMessage();
+      setErrorMessage(authMessage);
+    }, 0);
   };
 
   return (
@@ -76,10 +76,8 @@ const Template = ({ formData, title, message }: inputProps) => {
                 })}
               </div>
               <div className="text-center py-4 mt-3">
-                <p className="message" onClick={() => flipTemplate(title)}>
-                  {" "}
-                  {message}{" "}
-                </p>
+                <p className="error-message">{errorMessage}</p>
+
                 <MDBBtn
                   color="cyan"
                   type="submit"
@@ -89,6 +87,10 @@ const Template = ({ formData, title, message }: inputProps) => {
                 >
                   {title}
                 </MDBBtn>
+                <p className="message" onClick={() => flipTemplate(title)}>
+                  {" "}
+                  {message}{" "}
+                </p>
               </div>
             </form>
           </MDBCardBody>

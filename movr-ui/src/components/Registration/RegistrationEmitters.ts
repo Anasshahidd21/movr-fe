@@ -14,11 +14,12 @@ export default class RegistrationEmitters {
   protected SIGNIN = "SIGNIN";
 
   fireOnSignUp = (data: userData) => {
-    console.log(data, "printing data");
+    console.log(data, "calling signup");
     this.onDidSignUpEmitter?.emit(this.SIGNUP, data);
   };
 
   fireOnSignIn = (data: userData) => {
+    console.log(data, "calling sign in ");
     this.onDidSignInEmitter?.emit(this.SIGNIN, data);
   };
 }
