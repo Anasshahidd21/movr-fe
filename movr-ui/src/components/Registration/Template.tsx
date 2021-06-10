@@ -1,10 +1,11 @@
 import { MDBInput, MDBBtn, MDBCard, MDBCardBody } from "mdbreact";
 import "./TemplateRegistration.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import fire from "../../firebase";
 import { signUpUser } from "./RegService";
+import { globalEvent } from "@billjs/event-emitter";
+import RegistrationEmitters from "./RegistrationEmitters";
 require("firebase/auth");
-
 export interface IformData {
   label: string;
   inputType: string;
@@ -28,6 +29,7 @@ const Template = ({ formData, title, message }: inputProps) => {
   const [email, setEmail] = useState("");
   const user = fire.auth().currentUser;
 
+  let emitter: RegistrationEmitters | undefined;
   const onChange = async (data: any) => {
     switch (data.inputType) {
       case "password":
@@ -46,13 +48,20 @@ const Template = ({ formData, title, message }: inputProps) => {
     event: React.SyntheticEvent<HTMLButtonElement, Event>
   ) => {
     try {
+      emitter = new RegistrationEmitters();
+      console.log(emitter, "emitting");
       event.preventDefault();
       setErrorMessage("");
       console.log("we here");
-      const signIn = await signUpUser({ email, password });
-      if (signIn) {
-        setErrorMessage("success");
-      }
+      const data: userData = { email, password };
+      console.log(email);
+      console.log(password);
+      emitter.fireOnSignUp(data);
+      // console.log(emitter.SIGNUP);
+      // const signIn = await signUpUser({ email, password });
+      // if (signIn) {
+      //   setErrorMessage("success");
+      // }
     } catch (e) {
       setErrorMessage(e.message);
       console.log(e);
