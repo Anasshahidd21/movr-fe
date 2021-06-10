@@ -5,6 +5,7 @@ import fire from "../../firebase";
 import { signUpUser } from "./RegService";
 import { globalEvent } from "@billjs/event-emitter";
 import RegistrationEmitters from "./RegistrationEmitters";
+import RegModel from "./RegModel";
 require("firebase/auth");
 export interface IformData {
   label: string;
@@ -29,7 +30,7 @@ const Template = ({ formData, title, message }: inputProps) => {
   const [email, setEmail] = useState("");
   const user = fire.auth().currentUser;
 
-  let emitter: RegistrationEmitters | undefined;
+  let emitter: RegModel | undefined;
 
   const onChange = async (data: any, val: any) => {
     switch (data.inputType) {
@@ -50,10 +51,7 @@ const Template = ({ formData, title, message }: inputProps) => {
   ) => {
     try {
       event.preventDefault();
-      emitter = new RegistrationEmitters();
-      console.log(emitter, "emitting");
-      event.preventDefault();
-      emitter = new RegistrationEmitters();
+      emitter = new RegModel();
       console.log(emitter, "emitting");
       setErrorMessage("");
       console.log("we here");
@@ -63,16 +61,7 @@ const Template = ({ formData, title, message }: inputProps) => {
       };
       console.log(email);
       console.log(password);
-      // emitter.fireOnSignUp(data);
-      // const data: userData = { email, password };
-      // console.log(email);
-      // console.log(password);
       emitter.fireOnSignUp(data);
-      // console.log(emitter.SIGNUP);
-      // const signIn = await signUpUser({ email, password });
-      // if (signIn) {
-      //   setErrorMessage("success");
-      // }
     } catch (e) {
       setErrorMessage(e.message);
       console.log(e);
