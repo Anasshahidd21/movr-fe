@@ -48,6 +48,7 @@ const Template = ({ formData, title, message }: inputProps) => {
     event: React.SyntheticEvent<HTMLButtonElement, Event>
   ) => {
     try {
+      event.preventDefault();
       emitter = new RegistrationEmitters();
       console.log(emitter, "emitting");
       event.preventDefault();

@@ -44,7 +44,11 @@ export class regService extends RegistrationEmitters {
 =======
 export class regService extends RegistrationEmitters {
   protected listenOnSignUp = () => {
+<<<<<<< HEAD
 >>>>>>> 392a674... event emitters added
+=======
+    console.log("inside here?");
+>>>>>>> e70a359... resolve class dependency
     this.onDidSignUpEmitter.on(this.SIGNUP, async ({ email, password }) => {
       await signUpUser({ email, password });
     });
