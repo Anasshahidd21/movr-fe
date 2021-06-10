@@ -1,11 +1,17 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 392a674... event emitters added
 import { globalEvent } from "@billjs/event-emitter";
 import { EventEmitter } from "events";
 import fire from "../../firebase";
 import RegistrationEmitters from "./RegistrationEmitters";
+<<<<<<< HEAD
 =======
 import fire from "../../firebase";
 >>>>>>> 149a9bc... added the functionality to signup more abstractly
+=======
+>>>>>>> 392a674... event emitters added
 import { userData } from "./Template";
 
 export async function signUpUser({
@@ -31,9 +37,14 @@ export async function signInUser({
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export class regService extends RegistrationEmitters {
   protected listenOnSignUp = () => {
     console.log("inside here?");
+=======
+export class regService extends RegistrationEmitters {
+  protected listenOnSignUp = () => {
+>>>>>>> 392a674... event emitters added
     this.onDidSignUpEmitter.on(this.SIGNUP, async ({ email, password }) => {
       await signUpUser({ email, password });
     });
@@ -44,6 +55,7 @@ export class regService extends RegistrationEmitters {
       await signInUser({ email, password });
     });
   };
+<<<<<<< HEAD
 =======
 export class regService {
   //   private context: Context | undefined;
@@ -60,4 +72,6 @@ export class regService {
   //     this.context = c;
   //   }
 >>>>>>> 149a9bc... added the functionality to signup more abstractly
+=======
+>>>>>>> 392a674... event emitters added
 }
